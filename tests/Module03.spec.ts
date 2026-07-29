@@ -29,19 +29,22 @@ test("Test for basic log in", async({browser}) =>{
     await page.getByLabel('Username:').fill('Tester');
     await page.getByLabel('Password:').fill('test');
     //get login button and click it, first option
-    //await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('button', { name: 'Login' }).click();
 
-    //Second options
-    const [page2] = await Promise.all([
-        context.waitForEvent('page'),
-        page.getByRole('button', { name: 'Login' }).click({modifiers: ['Control']})
-    ]);
+    //Second options (for new tab) 
+    // const [page2] = await Promise.all([
+    //     context.waitForEvent('page'),
+    //     page.getByRole('button', { name: 'Login' }).click({modifiers: ['Control']})
+    // ]);
     //assert the new url is correct 
-    expect(page2.url()).toBe("http://secure.smartbearsoftware.com/samples/testcomplete12/weborders/");
 
-    await page2.bringToFront();
+    expect(page.url()).toBe("http://secure.smartbearsoftware.com/samples/testcomplete12/weborders/");
 
-    const menu = await page2.locator('#ctl00_menu > li');
+    //await page2.bringToFront();
+
+    const menu = await page.locator('#ctl00_menu > li');
 
     console.log(await menu.nth(1).textContent());
+
+    await expect( menu.nth(1)).toHaveText('View all products');
 })

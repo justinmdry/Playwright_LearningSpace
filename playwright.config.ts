@@ -19,6 +19,10 @@ export default defineConfig({
   reporter: 'html',
   //Standard timeout, similar to an implicit wait, standard is 30 s but we can decreaes by doing x *1000 where x is the amt of seconds.
   timeout: 10 * 1000,
+
+  //Retries (if something fails then it will rexecute)
+  retries: 1,
+
   //This is the timeout for assertions (below)
   expect:{
     timeout: 5*1000
@@ -31,7 +35,9 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: false,
+    headless: true,
+    screenshot: 'on-first-failure',
+    video: 'retain-on-first-failure',
   },
 
   /* Configure projects for major browsers */
