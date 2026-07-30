@@ -1,4 +1,5 @@
 import {expect, test}  from"@playwright/test";
+import loginPage from "../pages/loginPage";
 
 test("Test for basic navigation", async({browser}) => {
     const context = await browser.newContext();
@@ -48,3 +49,5 @@ test("Test for basic log in", async({browser}) =>{
 
     await expect( menu.nth(1)).toHaveText('View all products');
 })
+
+
