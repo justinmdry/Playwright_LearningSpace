@@ -10,6 +10,8 @@ export default class HomePage{
     private readonly firstNameCheck;
     private readonly lastNameCheck;
 
+    private readonly orderLink;
+
 
     constructor(page : Page){
         this.page = page;
@@ -19,6 +21,8 @@ export default class HomePage{
         this.firstNameCheck = page.locator("#ctl00_MainContent_orderGrid > tbody > tr:nth-child(2) > td:nth-child(2)");
         this.lastNameCheck = page.locator("#ctl00_MainContent_orderGrid > tbody > tr");
         this.logoutButton = page.locator('#ctl00_logout');
+
+        this.orderLink = page.locator('#ctl00_menu > li:nth-child(3) > a');
     }
 
     async checkFirstCB(){
@@ -57,6 +61,10 @@ export default class HomePage{
 
     async lastNameChecker(){
         return await this.lastNameCheck.last().locator("td").nth(1).textContent();
+    }
+
+    async clickToMakeOrder(){
+        await this.orderLink.click()
     }
 
 }

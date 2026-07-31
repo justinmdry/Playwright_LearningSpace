@@ -21,7 +21,7 @@ test("Test that deleting the first order works as intended", {tag : ['@project2'
         expect(await homeP.firstNameChecker()).not.toBe(GlobalData.firstNameCheck);
 })
 
-test("Test that deleting the last order works as intended", {tag : ['@project3', '@project']},async({page, loginP, homeP}) => {
+test("Test that deleting the last order works as intended", {tag : ['@project2', '@project']},async({page, loginP, homeP}) => {
         
         //use login Page object to login, all methods can be found in loginPage.ts
         await loginP.loginFeature(GlobalData.username, GlobalData.password);

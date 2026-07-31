@@ -18,7 +18,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   //Standard timeout, similar to an implicit wait, standard is 30 s but we can decreaes by doing x *1000 where x is the amt of seconds.
-  timeout: 15 * 1000,
+  timeout: 30 * 1000,
 
   //Retries (if something fails then it will rexecute)
   retries: 1,

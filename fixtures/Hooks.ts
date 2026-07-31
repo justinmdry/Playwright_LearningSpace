@@ -1,11 +1,12 @@
 import {test as base} from "@playwright/test";
 import LoginPage from "../pages/loginPage";
 import HomePage from "../pages/homePage";
+import OrderPage from "../pages/orderPage";
 
 type customFixtures = {
     loginP : LoginPage,
     homeP : HomePage,
-
+    orderP : OrderPage,
 };
 
 export const test = base.extend<customFixtures>({
@@ -17,6 +18,11 @@ export const test = base.extend<customFixtures>({
     homeP : async ({page}, use) => {
         const homeP = new HomePage(page);
         await use(homeP);
+    },
+
+    orderP : async({page}, use) =>{
+        const orderP = new OrderPage(page);
+        await use(orderP);
     },
 });
 
