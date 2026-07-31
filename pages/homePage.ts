@@ -52,11 +52,11 @@ export default class HomePage{
     }
 
     async firstNameChecker(){
-        await this.firstNameCheck.first().textContent();
+        return await this.firstNameCheck.first().textContent();
     }
 
     async lastNameChecker(){
-        await this.lastNameCheck.last().nth(2).textContent();
+        return await this.lastNameCheck.last().locator("td").nth(1).textContent();
     }
 
 }
