@@ -1,5 +1,5 @@
 import {expect, test}  from"@playwright/test";
-import loginPage from "../pages/loginPage";
+import loginPage from "../../pages/loginPage";
 
 test("Test for basic navigation", async({browser}) => {
     const context = await browser.newContext();

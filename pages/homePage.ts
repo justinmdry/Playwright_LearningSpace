@@ -7,6 +7,8 @@ export default class HomePage{
     private readonly deleteButton;
     private readonly checkboxes;
     private readonly logoutButton;
+    private readonly firstNameCheck;
+    private readonly lastNameCheck;
 
 
     constructor(page : Page){
@@ -14,11 +16,17 @@ export default class HomePage{
         this.firstCheckBox = page.locator("#ctl00_MainContent_orderGrid_ctl02_OrderSelector");
         this.deleteButton = page.locator("#ctl00_MainContent_btnDelete");
         this.checkboxes = page.locator("input[id*=ctl00_MainContent_orderGrid]");
+        this.firstNameCheck = page.locator("#ctl00_MainContent_orderGrid > tbody > tr:nth-child(2) > td:nth-child(2)");
+        this.lastNameCheck = page.locator("#ctl00_MainContent_orderGrid > tbody > tr");
         this.logoutButton = page.locator('#ctl00_logout');
     }
 
     async checkFirstCB(){
         await this.firstCheckBox.check();
+    }
+
+    async checkLastCb(){
+        await this.checkboxes.last().check();
     }
 
     async clickDeleteButton(){
@@ -34,8 +42,21 @@ export default class HomePage{
         await this.clickDeleteButton();
     }
 
+    async completeLastDeleteTest(){
+        await this.checkLastCb();
+        await this.clickDeleteButton();
+    }
+
     async logoutFromHomePage(){
         await this.logoutButton.click();
+    }
+
+    async firstNameChecker(){
+        await this.firstNameCheck.first().textContent();
+    }
+
+    async lastNameChecker(){
+        await this.lastNameCheck.last().nth(2).textContent();
     }
 
 }

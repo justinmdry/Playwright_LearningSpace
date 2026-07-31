@@ -14,11 +14,11 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   //Standard timeout, similar to an implicit wait, standard is 30 s but we can decreaes by doing x *1000 where x is the amt of seconds.
-  timeout: 30 * 1000,
+  timeout: 15 * 1000,
 
   //Retries (if something fails then it will rexecute)
   retries: 1,
@@ -35,7 +35,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: true,
+    headless: false,
     screenshot: 'on-first-failure',
     video: 'retain-on-first-failure',
   },
