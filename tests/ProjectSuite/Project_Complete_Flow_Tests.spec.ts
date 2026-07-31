@@ -1,7 +1,7 @@
 import {expect, test} from "../../fixtures/Hooks";
 import { GlobalData } from "../../data/GlobalData";
 
-test("Test that login and logout flow works correctly", {tag : ['@project3', '@project']},async({page, loginP, homeP, orderP}) => {
+test("Test that complete flow works correctly", {tag : ['@project3', '@project']},async({page, loginP, homeP, orderP}) => {
         
         //use login Page object to login, all methods can be found in loginPage.ts
         await loginP.loginFeature(GlobalData.username, GlobalData.password);
