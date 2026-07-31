@@ -14,7 +14,7 @@ export default class LoginPage{
         this.page = page;
         this.usernameField = page.getByLabel("Username:");
         this.passwordField = page.getByLabel("Password:");
-        this.loginButton = page.getByRole('button',{name : 'Login'});
+        this.loginButton = page.locator("#ctl00_MainContent_login_button");
         this.errorText = page.locator("#ctl00_MainContent_status");
     }
     //Methods for the login page 

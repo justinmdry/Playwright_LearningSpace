@@ -30,7 +30,7 @@ test("Test for basic log in", async({browser}) =>{
     await page.getByLabel('Username:').fill('Tester');
     await page.getByLabel('Password:').fill('test');
     //get login button and click it, first option
-    await page.getByRole('button', { name: 'Login' }).click();
+    await page.locator("#ctl00_MainContent_login_button").click();
 
     //Second options (for new tab) 
     // const [page2] = await Promise.all([
@@ -39,13 +39,17 @@ test("Test for basic log in", async({browser}) =>{
     // ]);
     //assert the new url is correct 
 
+    await page.waitForLoadState('domcontentloaded');
+
     expect(page.url()).toBe("http://secure.smartbearsoftware.com/samples/testcomplete12/weborders/");
 
     //await page2.bringToFront();
 
-    const menu = await page.locator('#ctl00_menu > li');
+    const menu = page.locator('#ctl00_menu > li');
 
     console.log(await menu.nth(1).textContent());
+
+    await page.waitForLoadState('domcontentloaded');
 
     await expect( menu.nth(1)).toHaveText('View all products');
 })

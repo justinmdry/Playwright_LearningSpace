@@ -7,6 +7,7 @@ test("Simple login test using POM", async({page}) => {
         const loginP : LoginPage = new LoginPage(page);
         //Call methods from POM structure
         await loginP.loginFeature(GlobalData.username, GlobalData.password);
+        await page.waitForLoadState('domcontentloaded');
         expect(page.url()).toBe("http://secure.smartbearsoftware.com/samples/testcomplete12/weborders/");
 })
 
@@ -14,6 +15,6 @@ test("Simple failing login test", async({page}) =>{
     const loginP : LoginPage = new LoginPage(page);
 
     await loginP.loginFeature(GlobalData.username, GlobalData.invalidPassword);
-
+    await page.waitForLoadState('domcontentloaded');
     expect(await loginP.readErrorMsg()).toContain(GlobalData.errorMsg);
 })

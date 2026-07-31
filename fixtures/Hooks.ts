@@ -23,9 +23,9 @@ export const test = base.extend<customFixtures>({
 export {expect} from "@playwright/test";
 
 //Example of hooks
-test.beforeAll(async() =>{
-    console.log("This is before");
-});
+// test.beforeAll(async() =>{
+//     console.log("This is before");
+// });
 
 /*
 If you need to use the page for anything like doing login before doing any features to do with check box deletion you can do 

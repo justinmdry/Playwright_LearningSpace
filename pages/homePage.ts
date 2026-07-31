@@ -6,6 +6,7 @@ export default class HomePage{
     private readonly firstCheckBox;
     private readonly deleteButton;
     private readonly checkboxes;
+    private readonly logoutButton;
 
 
     constructor(page : Page){
@@ -13,6 +14,7 @@ export default class HomePage{
         this.firstCheckBox = page.locator("#ctl00_MainContent_orderGrid_ctl02_OrderSelector");
         this.deleteButton = page.locator("#ctl00_MainContent_btnDelete");
         this.checkboxes = page.locator("input[id*=ctl00_MainContent_orderGrid]");
+        this.logoutButton = page.locator('#ctl00_logout');
     }
 
     async checkFirstCB(){
@@ -30,6 +32,10 @@ export default class HomePage{
     async completeFirstDeleteTest(){
         await this.checkFirstCB();
         await this.clickDeleteButton();
+    }
+
+    async logoutFromHomePage(){
+        await this.logoutButton.click();
     }
 
 }
