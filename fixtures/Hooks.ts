@@ -2,11 +2,17 @@ import {test as base} from "@playwright/test";
 import LoginPage from "../pages/loginPage";
 import HomePage from "../pages/homePage";
 import OrderPage from "../pages/orderPage";
+import UserClient from "../api/clients/UserClient";
+import RegisterClient from "../api/clients/RegisterClient.ts";
+import LoginClient from "../api/clients/LoginClient.ts";
 
 type customFixtures = {
     loginP : LoginPage,
     homeP : HomePage,
     orderP : OrderPage,
+    userClient : UserClient,
+    registerClient : RegisterClient,
+    loginClient : LoginClient
 };
 
 export const test = base.extend<customFixtures>({
@@ -24,6 +30,18 @@ export const test = base.extend<customFixtures>({
         const orderP = new OrderPage(page);
         await use(orderP);
     },
+    userClient : async({request}, use) => {
+        const userClient = new UserClient(request);
+        await use(userClient);
+    },
+    registerClient : async({request}, use) => {
+        const registerClient = new RegisterClient(request);
+        await use(registerClient);
+    },
+    loginClient : async({request}, use) => {
+        const loginClient = new LoginClient(request);
+        await use(loginClient);
+    }
 });
 
 export {expect} from "@playwright/test";
