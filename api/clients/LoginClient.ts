@@ -1,7 +1,12 @@
 import {APIRequestContext} from '@playwright/test';
 import { RegisterModel } from '../models/register.model';
 
-export default class RegisterClient {
+/**
+ * Client for interacting with the login API. Clients act the same way as page objects, but for API endpoints. 
+ * They encapsulate the logic for making requests and handling responses, providing a clean interface for tests to interact with the API.
+ */
+
+export default class LoginClient {
 
     constructor(private readonly request: APIRequestContext) {}
 
