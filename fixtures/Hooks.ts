@@ -1,3 +1,11 @@
+/**
+ * Custom Playwright test fixtures.
+ *
+ * Extends the base Playwright `test` so every spec can request `loginP`, `homeP`,
+ * and `orderP` directly as test arguments instead of constructing each page object
+ * by hand. Import `test`/`expect` from this file (not "@playwright/test") in any
+ * spec that needs the page objects.
+ */
 import {test as base} from "@playwright/test";
 import LoginPage from "../pages/loginPage";
 import HomePage from "../pages/homePage";

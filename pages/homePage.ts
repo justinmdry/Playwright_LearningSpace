@@ -1,8 +1,12 @@
 import {Page} from "@playwright/test";
-import { GlobalData } from "../data/GlobalData";
+import BasePage from "./basePage";
 
-export default class HomePage{
-    private readonly page;
+/**
+ * Page object for the WebOrders home/orders grid page (Default.aspx).
+ * Handles selecting and deleting orders from the grid, reading grid row values,
+ * logging out, and navigating to the "make an order" page.
+ */
+export default class HomePage extends BasePage{
     private readonly firstCheckBox;
     private readonly deleteButton;
     private readonly checkboxes;
@@ -14,7 +18,7 @@ export default class HomePage{
 
 
     constructor(page : Page){
-        this.page = page;
+        super(page);
         this.firstCheckBox = page.locator("#ctl00_MainContent_orderGrid_ctl02_OrderSelector");
         this.deleteButton = page.locator("#ctl00_MainContent_btnDelete");
         this.checkboxes = page.locator("input[id*=ctl00_MainContent_orderGrid]");
@@ -25,46 +29,54 @@ export default class HomePage{
         this.orderLink = page.locator('#ctl00_menu > li:nth-child(3) > a');
     }
 
+    /** Checks the checkbox on the first row of the order grid. */
     async checkFirstCB(){
-        await this.firstCheckBox.check();
+        await this.check(this.firstCheckBox);
     }
 
+    /** Checks the checkbox on the last row of the order grid. */
     async checkLastCb(){
-        await this.checkboxes.last().check();
+        await this.check(this.checkboxes.last());
     }
 
     async clickDeleteButton(){
-        await this.deleteButton.click();
+        await this.click(this.deleteButton);
     }
 
+    /** Returns how many order-grid checkboxes are currently present. */
     async countCheckBoxes() : Promise<number | null>{
-        return await this.checkboxes.count();
+        return await this.count(this.checkboxes);
     }
 
+    /** Selects the first order row and deletes it. */
     async completeFirstDeleteTest(){
         await this.checkFirstCB();
         await this.clickDeleteButton();
     }
 
+    /** Selects the last order row and deletes it. */
     async completeLastDeleteTest(){
         await this.checkLastCb();
         await this.clickDeleteButton();
     }
 
     async logoutFromHomePage(){
-        await this.logoutButton.click();
+        await this.click(this.logoutButton);
     }
 
+    /** Reads the customer name from the first row of the order grid. */
     async firstNameChecker(){
-        return await this.firstNameCheck.first().textContent();
+        return await this.getText(this.firstNameCheck.first());
     }
 
+    /** Reads the customer name (2nd column) from the last row of the order grid. */
     async lastNameChecker(){
-        return await this.lastNameCheck.last().locator("td").nth(1).textContent();
+        return await this.getText(this.lastNameCheck.last().locator("td").nth(1));
     }
 
+    /** Navigates to the "make an order" page via the nav menu link. */
     async clickToMakeOrder(){
-        await this.orderLink.click()
+        await this.click(this.orderLink);
     }
 
 }

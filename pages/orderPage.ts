@@ -1,8 +1,13 @@
 import {Page} from "@playwright/test";
 import { GlobalData } from "../data/GlobalData";
+import BasePage from "./basePage";
 
-export default class OrderPage{
-    private readonly page;
+/**
+ * Page object for the WebOrders "create an order" page (Process.aspx).
+ * Provides individual field actions plus a combined `completeOrder` helper
+ * that fills out and submits an order using the values in GlobalData.
+ */
+export default class OrderPage extends BasePage{
 
     private readonly productSelector;
     private readonly quant;
@@ -24,8 +29,8 @@ export default class OrderPage{
 
 
     constructor(page : Page){
-        this.page = page;
-        
+        super(page);
+
         this.productSelector = this.page.getByLabel("Product:");
         this.quant = this.page.getByLabel("Quantity:");
         this.customerName = this.page.getByLabel("Customer name:");
@@ -43,45 +48,46 @@ export default class OrderPage{
     }
 
     async selectProduct(product : string){
-        await this.productSelector.selectOption(product);
+        await this.selectOption(this.productSelector, product);
     }
 
     async fillQuantity(quantity : string){
-        await this.quant.fill(quantity);
+        await this.fill(this.quant, quantity);
     }
 
     async fillCustomerName(name : string){
-        await this.customerName.fill(name);
+        await this.fill(this.customerName, name);
     }
 
     async fillStreetName(name: string){
-        await this.streetName.fill(name);
+        await this.fill(this.streetName, name);
     }
 
     async fillCityName(name: string){
-        await this.cityName.fill(name);
+        await this.fill(this.cityName, name);
     }
 
     async fillStateName(name:string){
-        await this.stateName.fill(name);
+        await this.fill(this.stateName, name);
     }
 
     async fillZip(zip:string){
-        await this.zipLoc.fill(zip);
+        await this.fill(this.zipLoc, zip);
     }
 
     async selectCard(){
-        await this.cardSelector.check();
+        await this.check(this.cardSelector);
     }
 
     async fillCardNumber(number: string){
-        await this.cardNumber.fill(number);
+        await this.fill(this.cardNumber, number);
     }
 
     async fillExpireDate(date : string){
-        await this.expiredate.fill(date);
+        await this.fill(this.expiredate, date);
     }
 
+    /** Fills out the entire order form using GlobalData values and submits it. */
     async completeOrder(){
         //Fill in informaiton
         await this.selectProduct(GlobalData.product);
@@ -100,8 +106,9 @@ export default class OrderPage{
         await this.processButton.click();
     }
 
+    /** Navigates to the "view all orders" page via the nav menu link. */
     async clickToViewAllOrders(){
-        await this.viewAllOrdersLink.click();
+        await this.click(this.viewAllOrdersLink);
     }
 
 }
